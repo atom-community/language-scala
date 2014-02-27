@@ -1,0 +1,88 @@
+'.source.scala':
+  'case class scaffolding':
+    'prefix': 'ccc'
+    'body': 'class ${1:Class}(${2/(\\S+\\s*:)/val $1/g}) {\n  override def hashCode = 0 ${2/(\\S+)\\s*:[^,]+(,?)/+ $1.##/g}\n  override def equals(other: Any) = $1.unapply(this) == $1.unapply(other)\n  override def canEqual(other: Any) = other.isInstanceOf[$1]\n}\n\nobject $1 {\n  def apply(${2:arguments}): $1 = new $1(${2/(\\S+)\\s*:[^,]+/$1/g})\n  def unapply(other: Any) = other match {\n    case x: $1 => import x._ ; Some(${2/(\\S+)\\s*:[^,]+/$1/g})\n    case _     => None\n  }\n}\n'
+  'case class':
+    'prefix': 'case class'
+    'body': 'case class $1${2:($3)} ${4:extends ${5:Any} }${6:{\n  $7\n\\}}$0'
+  'case':
+    'prefix': 'case'
+    'body': 'case ${1:_} => ${0}'
+  'class':
+    'prefix': 'class'
+    'body': 'class $1${2:($3)} ${4:extends ${5:Any} }{\n\t$0\n}'
+  'enumeration':
+    'prefix': 'enumeration'
+    'body': 'object ${1:MyEnumeration} extends Enumeration {\n  type $1 = Value\n  val ${2:${3:MyEnumeration1}, ${4:MyEnumeration2}} = Value\n}\n\n${5:import $1._}\n${0}'
+  'for - Block':
+    'prefix': 'for'
+    'body': 'for ($1 <- ${2:${3:0} to ${4:10}}) {\n\t$0\n}'
+  'for - Yield':
+    'prefix': 'for'
+    'body': 'for {\n  $1 <- ${2:${3:0} to ${4:10}}\n} yield $0'
+  'if':
+    'prefix': 'if'
+    'body': 'if ($1) {\n\t$2\n}\n'
+  'import mutable/immutable':
+    'prefix': 'impc'
+    'body': 'import scala.collection.{ mutable, immutable, generic }'
+  'lambda':
+    'prefix': 'lam'
+    'body': '($1) => ${2:{${3:}\\}}'
+  'left arrow':
+    'prefix': '<-'
+    'body': '${1:"${2}"} <- ${3:"${4}"}'
+  'main':
+    'prefix': 'main'
+    'body': 'def main(args: Array[String]): Unit = {\n  $1\n}\n'
+  'match':
+    'prefix': 'match'
+    'body': 'match {\n\tcase ${1:_} => $0\n}\n'
+  'method':
+    'prefix': 'def'
+    'body': 'def ${1:method}${2:(${4:arg}: ${5:Type})} = {\n\t${0}\n}'
+  'object with main method':
+    'prefix': 'omain'
+    'body': 'object $1 {\n  def main(args: Array[String]): Unit = {\n    $2\n  }\n}\n'
+  'object':
+    'prefix': 'object'
+    'body': 'object $1 ${2:extends ${3:Any} }{\n\t$0\n}'
+  'println':
+    'prefix': 'pl'
+    'body': 'println($0)'
+  'right arrow':
+    'prefix': '->'
+    'body': '${1:"${2}"} -> ${3:"${4}"}'
+  'script header':
+    'prefix': 'script'
+    'body': '#!/bin/sh\n  exec scala "\\$0" "\\$@"\n!#\n\n$1'
+  'shortcut - case class':
+    'prefix': 'cc'
+    'body': 'case class'
+  'shortcut - class':
+    'prefix': 'c'
+    'body': 'class'
+  'shortcut - enumeration':
+    'prefix': 'enum'
+    'body': 'enumeration'
+  'shortcut - match':
+    'prefix': 'm'
+    'body': 'match'
+  'shortcut - object':
+    'prefix': 'obj'
+    'body': 'object'
+  'shortcut - trait':
+    'prefix': 't'
+    'body': 'trait'
+  'toString':
+    'prefix': 'tostr'
+    'body': 'override def toString(): String =  $0 \n'
+  'trait':
+    'prefix': 'trait'
+    'body': 'trait $1 {\n\t$0\n}'
+  'try/catch':
+    'prefix': 'try'
+    'body': 'try { \n  ${1:// ...}\n} catch {\n  case e: Exception => $0\n}'
+  'with':
+    'prefix': 'with'
+    'body': 'with ${1:Any}'
