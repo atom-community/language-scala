@@ -1,9 +1,8 @@
 {
   "name": "language-scala",
-  "version": "0.0.0",
-  "private": true,
-  "description": "A short description of your package",
-  "repository": "https://github.com/atom/language-scala",
+  "version": "0.1.0",
+  "description": "Scala language support in Atom",
+  "repository": "https://github.com/jroesch/language-scala",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
