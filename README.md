@@ -1,3 +1,3 @@
-# language-scala package
+# Language support for Scala in Atom.
 
-A short description of your package.
+Converted from the [Scala TextMate bundle](https://github.com/mads379/scala.tmbundle)
