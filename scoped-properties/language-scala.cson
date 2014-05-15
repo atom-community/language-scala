@@ -1,6 +1,6 @@
 '.source.scala':
   'editor':
-    'increaseIndentPattern': '(^.*(\\{[^}]*|\\([^)]*)$)'
+    'increaseIndentPattern': '(^.*(\\{[^}]*|\\([^)]*)$|^.*\\=\\s*$)'
     'decreaseIndentPattern': '^\\s*(\\}|\\))'
 '.keyword.other.documentation.scaladoc.scala':
   'editor':
