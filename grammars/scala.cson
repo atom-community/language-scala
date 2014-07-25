@@ -51,8 +51,29 @@
         'name': 'invalid.illegal.character-literal-too-long'
       }
     ]
+  'types':
+      'name': "scala.type"
+      'begin': '(\\[)'
+      'beginCaptures':
+        '1':
+          'name': 'bracket.type.scala'
+      'end': '\\]'
+      'patterns': [
+        {
+          'comments': '(<%|=:=|<:<|<%<|>:|<:)'
+          'match': '(<%|=:=|<:<|<%<|>:|<:|\\+|\\-)'
+          'name': 'meta.bounds.scala'
+        }
+        {
+          'match': '(\\w+)'
+          'name': 'class'
+        }
+      ]
   'code':
     'patterns': [
+      {
+        'include': '#types'
+      }
       {
         'include': '#storage-modifiers'
       }
@@ -145,7 +166,9 @@
                 'name': 'keyword.other.documentation.scaladoc.scala'
               '2':
                 'name': 'entity.name.class'
-            'match': '(@(?:tparam|throws))\\s+(\\S+)'
+              '3':
+                'name': 'entity.name.description'
+            'match': "(@(?:tparam|throws))\\s+(\\S+)\\s+(.*)"
           }
           {
             'match': '@(return|see|note|example|usecase|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
@@ -281,7 +304,7 @@
         'name': 'variable.package.scala'
       }
       {
-        'match': '([^\\s{;.]+)\\s*'
+        'match': '([^\\s{;.]+)\\s*[._]'
         'name': 'variable.import.scala'
       }
       {
@@ -365,15 +388,11 @@
         'name': 'keyword.operator.scala'
       }
     ]
-  'meta-bounds':
-    'comment': 'For themes: Matching view bounds'
-    'match': '<%|=:=|<:<|<%<|>:|<:'
-    'name': 'meta.bounds.scala'
   'meta-brackets':
     'comment': 'For themes: Brackets look nice when colored.'
     'patterns': [
       {
-        'match': '{|}|\\(|\\)|\\[|\\]'
+        'match': '{|}|\\(|\\)'
         'name': 'meta.bracket.scala'
       }
     ]
