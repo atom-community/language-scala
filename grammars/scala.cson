@@ -75,9 +75,8 @@
   'interpolation-expression' :
     'patterns': [
       {
-        'name': "interpolation.expression"
-        'begin': '\\$\\{'
-        'end': '\\}'
+        'name': "interpolation.expression.embedded"
+        'begin': '(\\$\\{)'
         'patterns': [
           {
             'name': 'margin'
@@ -87,6 +86,10 @@
             'include': '#code'
           }
         ]
+        'end': '(\\})'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
       }
       {
         'match': '\\$(\\w+)'
@@ -95,58 +98,49 @@
             'name': 'variable'
       }
       {
-        'name': "scala.expression"
+        'name': "scala.expression.embedded"
         'begin': '(""")'
-        'beginCaptures':
-          '1':
-            'name': 'start.scala'
-        'end': '(""")'
-        'endCaptures':
-          '1':
-            'name': 'end.scala'
         'patterns': [
           { 'include': "#code"}
         ]
+        'end': '(""")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
       }
     ]
   'quasiquotes-patterns':
     'patterns': [
       {
-        'include': '#code'
+        'include': '#interpolation-expression'
       }
       {
-        'include': '#interpolation-expression'
+        'include': '#code'
       }
     ]
   'interpolations':
     'patterns': [
       {
-        'name': "scala.quasiquote"
+        'name': "scala.quasiquote.embedded"
         'begin': '(q""")'
-        'beginCaptures':
-          '1':
-            'name': 'quotestart.scala'
-        'end': '(""")'
-        'endCaptures':
-          '1':
-            'name': 'quoteend.scala'
         'patterns': [
           { 'include': "#quasiquotes-patterns"}
         ]
+        'end': '(""")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
       }
       {
-        'name': "scala.quasiquote"
+        'name': "scala.quasiquote.embedded"
         'begin': '(q")'
-        'beginCaptures':
-          '1':
-            'name': 'start.scala'
-        'end': '(")'
-        'endCaptures':
-          '1':
-            'name': 'end.scala'
         'patterns': [
           { 'include': "#quasiquotes-patterns"}
         ]
+        'end': '(")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
       }
       {
         'name': "scala.string-interpolation"
@@ -279,8 +273,19 @@
             'match': "(@(?:tparam|throws))\\s+(\\S+)\\s+(.*)"
           }
           {
-            'match': '@(return|see|note|example|usecase|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
+            'match': '@(return|see|note|example|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
             'name': 'keyword.other.documentation.scaladoc.scala'
+          }
+          {
+            'begin': '(@usecase)\\b'
+            'beginCaptures':
+              '1':
+                'name': 'keyword.other.documentation.scaladoc.scala.usecase'
+            'end': '(?<=[\\n;])'
+            'name': 'other.documentation.scaladoc.scala.usecase-block.embeded'
+            'patterns': [
+              { 'include': '#code' }
+            ]
           }
           {
             'captures':
@@ -291,6 +296,21 @@
               '3':
                 'name': 'punctuation.definition.documentation.link.scala'
             'match': '(\\[\\[)([^\\]]+)(\\]\\])'
+          }
+          {
+            'name': 'code-example.embedded'
+            'begin': '(\\{\\{\\{)'
+            'patterns': [
+              {
+                'name': 'margin'
+                'match': '^\\s*\\*'
+              }
+              {'include': '#code'}
+            ]
+            'end': '(\\}\\}\\})'
+            'captures':
+              '1':
+                'name': 'delimiters.scala'
           }
         ]
       }
@@ -602,17 +622,17 @@
   'xml-embedded-content':
     'patterns': [
       {
-        'begin': '{'
-        'captures':
-          '0':
-            'name': 'meta.bracket.scala'
-        'end': '}'
         'name': 'meta.source.embedded.scala'
+        'begin': '{'
         'patterns': [
           {
             'include': '#code'
           }
         ]
+        'end': '}'
+        'captures':
+          '0':
+            'name': 'meta.bracket.scala'
       }
       {
         'captures':
