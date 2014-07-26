@@ -75,6 +75,20 @@
   'interpolation-expression' :
     'patterns': [
       {
+        'name': "interpolation.expression"
+        'begin': '\\$\\{'
+        'end': '\\}'
+        'patterns': [
+          {
+            'name': 'margin'
+            'match': '^\\s*\\|'
+          }
+          {
+            'include': '#code'
+          }
+        ]
+      }
+      {
         'match': '\\$(\\w+)'
         'captures':
           '1':
@@ -95,7 +109,6 @@
         ]
       }
     ]
-
   'quasiquotes-patterns':
     'patterns': [
       {
@@ -133,6 +146,20 @@
             'name': 'end.scala'
         'patterns': [
           { 'include': "#quasiquotes-patterns"}
+        ]
+      }
+      {
+        'name': "scala.string-interpolation"
+        'begin': '(s""")'
+        'beginCaptures':
+          '1':
+            'name': 'start'
+        'end': '(""")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': '#interpolation-expression' }
         ]
       }
       {
