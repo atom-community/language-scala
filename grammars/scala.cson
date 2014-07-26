@@ -7,6 +7,9 @@
 'name': 'Scala'
 'patterns': [
   {
+    'include': '#interpolations'
+  }
+  {
     'include': '#code'
   }
 ]
@@ -69,6 +72,84 @@
           'name': 'class'
         }
       ]
+  'interpolation-expression' :
+    'patterns': [
+      {
+        'match': '\\$(\\w+)'
+        'captures':
+          '1':
+            'name': 'variable'
+      }
+      {
+        'name': "scala.expression"
+        'begin': '(""")'
+        'beginCaptures':
+          '1':
+            'name': 'start.scala'
+        'end': '(""")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': "#code"}
+        ]
+      }
+    ]
+
+  'quasiquotes-patterns':
+    'patterns': [
+      {
+        'include': '#code'
+      }
+      {
+        'include': '#interpolation-expression'
+      }
+    ]
+  'interpolations':
+    'patterns': [
+      {
+        'name': "scala.quasiquote"
+        'begin': '(q""")'
+        'beginCaptures':
+          '1':
+            'name': 'quotestart.scala'
+        'end': '(""")'
+        'endCaptures':
+          '1':
+            'name': 'quoteend.scala'
+        'patterns': [
+          { 'include': "#quasiquotes-patterns"}
+        ]
+      }
+      {
+        'name': "scala.quasiquote"
+        'begin': '(q")'
+        'beginCaptures':
+          '1':
+            'name': 'start.scala'
+        'end': '(")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': "#quasiquotes-patterns"}
+        ]
+      }
+      {
+        'name': "scala.string-interpolation"
+        'begin': '(s")'
+        'beginCaptures':
+          '1':
+            'name': 'start'
+        'end': '(")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': '#interpolation-expression' }
+        ]
+      }
+    ]
   'code':
     'patterns': [
       {
