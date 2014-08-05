@@ -7,6 +7,9 @@
 'name': 'Scala'
 'patterns': [
   {
+    'include': '#interpolations'
+  }
+  {
     'include': '#code'
   }
 ]
@@ -51,8 +54,128 @@
         'name': 'invalid.illegal.character-literal-too-long'
       }
     ]
+  'types':
+      'name': "scala.type"
+      'begin': '(\\[)'
+      'beginCaptures':
+        '1':
+          'name': 'bracket.type.scala'
+      'end': '\\]'
+      'patterns': [
+        {
+          'comments': '(<%|=:=|<:<|<%<|>:|<:)'
+          'match': '(<%|=:=|<:<|<%<|>:|<:|\\+|\\-)'
+          'name': 'meta.bounds.scala'
+        }
+        {
+          'match': '(\\w+)'
+          'name': 'class'
+        }
+      ]
+  'interpolation-expression' :
+    'patterns': [
+      {
+        'name': "interpolation.expression.embedded"
+        'begin': '(\\$\\{)'
+        'patterns': [
+          {
+            'name': 'margin'
+            'match': '^\\s*\\|'
+          }
+          {
+            'include': '#code'
+          }
+        ]
+        'end': '(\\})'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
+      }
+      {
+        'match': '\\$(\\w+)'
+        'captures':
+          '1':
+            'name': 'variable'
+      }
+      {
+        'name': "scala.expression.embedded"
+        'begin': '(""")'
+        'patterns': [
+          { 'include': "#code"}
+        ]
+        'end': '(""")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
+      }
+    ]
+  'quasiquotes-patterns':
+    'patterns': [
+      {
+        'include': '#interpolation-expression'
+      }
+      {
+        'include': '#code'
+      }
+    ]
+  'interpolations':
+    'patterns': [
+      {
+        'name': "scala.quasiquote.embedded"
+        'begin': '(q""")'
+        'patterns': [
+          { 'include': "#quasiquotes-patterns"}
+        ]
+        'end': '(""")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
+      }
+      {
+        'name': "scala.quasiquote.embedded"
+        'begin': '(q")'
+        'patterns': [
+          { 'include': "#quasiquotes-patterns"}
+        ]
+        'end': '(")'
+        'captures':
+          '1':
+            'name': 'delimiters.scala'
+      }
+      {
+        'name': "scala.string-interpolation"
+        'begin': '(s""")'
+        'beginCaptures':
+          '1':
+            'name': 'start'
+        'end': '(""")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': '#interpolation-expression' }
+        ]
+      }
+      {
+        'name': "scala.string-interpolation"
+        'begin': '(s")'
+        'beginCaptures':
+          '1':
+            'name': 'start'
+        'end': '(")'
+        'endCaptures':
+          '1':
+            'name': 'end.scala'
+        'patterns': [
+          { 'include': '#interpolation-expression' }
+        ]
+      }
+    ]
   'code':
     'patterns': [
+      {
+        'include': '#types'
+      }
       {
         'include': '#storage-modifiers'
       }
@@ -145,11 +268,24 @@
                 'name': 'keyword.other.documentation.scaladoc.scala'
               '2':
                 'name': 'entity.name.class'
-            'match': '(@(?:tparam|throws))\\s+(\\S+)'
+              '3':
+                'name': 'entity.name.description'
+            'match': "(@(?:tparam|throws))\\s+(\\S+)\\s+(.*)"
           }
           {
-            'match': '@(return|see|note|example|usecase|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
+            'match': '@(return|see|note|example|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
             'name': 'keyword.other.documentation.scaladoc.scala'
+          }
+          {
+            'begin': '(@usecase)\\b'
+            'beginCaptures':
+              '1':
+                'name': 'keyword.other.documentation.scaladoc.scala.usecase'
+            'end': '(?<=[\\n;])'
+            'name': 'other.documentation.scaladoc.scala.usecase-block.embeded'
+            'patterns': [
+              { 'include': '#code' }
+            ]
           }
           {
             'captures':
@@ -160,6 +296,21 @@
               '3':
                 'name': 'punctuation.definition.documentation.link.scala'
             'match': '(\\[\\[)([^\\]]+)(\\]\\])'
+          }
+          {
+            'name': 'code-example.embedded'
+            'begin': '(\\{\\{\\{)'
+            'patterns': [
+              {
+                'name': 'margin'
+                'match': '^\\s*\\*'
+              }
+              {'include': '#code'}
+            ]
+            'end': '(\\}\\}\\})'
+            'captures':
+              '1':
+                'name': 'delimiters.scala'
           }
         ]
       }
@@ -281,7 +432,7 @@
         'name': 'variable.package.scala'
       }
       {
-        'match': '([^\\s{;.]+)\\s*'
+        'match': '([^\\s{;.]+)\\s*[._]'
         'name': 'variable.import.scala'
       }
       {
@@ -365,15 +516,11 @@
         'name': 'keyword.operator.scala'
       }
     ]
-  'meta-bounds':
-    'comment': 'For themes: Matching view bounds'
-    'match': '<%|=:=|<:<|<%<|>:|<:'
-    'name': 'meta.bounds.scala'
   'meta-brackets':
     'comment': 'For themes: Brackets look nice when colored.'
     'patterns': [
       {
-        'match': '{|}|\\(|\\)|\\[|\\]'
+        'match': '{|}|\\(|\\)'
         'name': 'meta.bracket.scala'
       }
     ]
@@ -475,17 +622,17 @@
   'xml-embedded-content':
     'patterns': [
       {
-        'begin': '{'
-        'captures':
-          '0':
-            'name': 'meta.bracket.scala'
-        'end': '}'
         'name': 'meta.source.embedded.scala'
+        'begin': '{'
         'patterns': [
           {
             'include': '#code'
           }
         ]
+        'end': '}'
+        'captures':
+          '0':
+            'name': 'meta.bracket.scala'
       }
       {
         'captures':
