@@ -1,7 +1,8 @@
-'.source.scala':
+'.source':
   'editor':
     'increaseIndentPattern': '(^.*(\\{[^}]*|\\([^)]*)$|^.*\\=\\s*$)'
     'decreaseIndentPattern': '^\\s*(\\}|\\))'
+    'commentStart': '//'
 '.keyword.other.documentation.scaladoc.scala':
   'editor':
     'completions': [
