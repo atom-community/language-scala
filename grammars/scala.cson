@@ -422,7 +422,7 @@
     'beginCaptures':
       '1':
         'name': 'keyword.other.import.scala'
-    'end': '(?<=[\\n;])'
+    'end': '([\\n;]+)'
     'name': 'meta.import.scala'
     'patterns': [
       {
