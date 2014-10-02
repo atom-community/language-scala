@@ -1,5 +1,6 @@
 'fileTypes': [
-  'scala'
+  'scala',
+  'sbt'
 ]
 'firstLineMatch': '^#!/.*\\b\\w*scala\\b'
 'foldingStartMarker': '/\\*\\*|\\{\\s*$'
