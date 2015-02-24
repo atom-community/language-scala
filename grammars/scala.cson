@@ -501,6 +501,10 @@
         'name': 'keyword.control.exception.scala'
       }
       {
+        'match': '(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+'
+        'name': 'keyword.operator.scala'
+      }
+      {
         'match': '(==?|!=|<=|>=|<>|<|>)'
         'name': 'keyword.operator.comparison.scala'
       }
@@ -511,10 +515,6 @@
       {
         'match': '(!|&&|\\|\\|)'
         'name': 'keyword.operator.logical.scala'
-      }
-      {
-        'match': '(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+'
-        'name': 'keyword.operator.scala'
       }
     ]
   'meta-brackets':
