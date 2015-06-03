@@ -274,7 +274,7 @@
             'match': "(@(?:tparam|throws))\\s+(\\S+)\\s+(.*)"
           }
           {
-            'match': '@(return|see|note|example|author|version|since|todo|deprecated|migration|define|inheritdoc)\\b'
+            'match': '@(return|see|note|example|author|version|since|todo|deprecated|migration|define|inheritdoc|constructor)\\b'
             'name': 'keyword.other.documentation.scaladoc.scala'
           }
           {
