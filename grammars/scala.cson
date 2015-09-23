@@ -76,97 +76,50 @@
   'interpolation-expression' :
     'patterns': [
       {
-        'name': "interpolation.expression.embedded"
+        'name': 'source.embedded.scala'
         'begin': '(\\$\\{)'
         'patterns': [
-          {
-            'name': 'margin'
-            'match': '^\\s*\\|'
-          }
-          {
-            'include': '#code'
-          }
+          { 'include': '$self' }
         ]
         'end': '(\\})'
         'captures':
-          '1':
-            'name': 'delimiters.scala'
+          '0':
+            'name': 'punctuation.section.embedded.scala'
       }
       {
-        'match': '\\$(\\w+)'
+        'name': 'source.embedded.scala'
+        'match': '(\\$)\\w+'
         'captures':
           '1':
-            'name': 'variable'
-      }
-      {
-        'name': "scala.expression.embedded"
-        'begin': '(""")'
-        'patterns': [
-          { 'include': "#code"}
-        ]
-        'end': '(""")'
-        'captures':
-          '1':
-            'name': 'delimiters.scala'
-      }
-    ]
-  'quasiquotes-patterns':
-    'patterns': [
-      {
-        'include': '#interpolation-expression'
-      }
-      {
-        'include': '#code'
+            'name': 'punctuation.section.embedded.scala'
       }
     ]
   'interpolations':
     'patterns': [
       {
-        'name': "scala.quasiquote.embedded"
-        'begin': '(q""")'
-        'patterns': [
-          { 'include': "#quasiquotes-patterns"}
-        ]
-        'end': '(""")'
-        'captures':
-          '1':
-            'name': 'delimiters.scala'
-      }
-      {
-        'name': "scala.quasiquote.embedded"
-        'begin': '(q")'
-        'patterns': [
-          { 'include': "#quasiquotes-patterns"}
-        ]
-        'end': '(")'
-        'captures':
-          '1':
-            'name': 'delimiters.scala'
-      }
-      {
-        'name': "scala.string-interpolation"
-        'begin': '(s""")'
+        'name': 'string.quoted.triple.scala'
+        'begin': '\\w+"""'
         'beginCaptures':
-          '1':
-            'name': 'start'
-        'end': '(""")'
+          '0':
+            'name': 'punctuation.definition.string.begin.scala'
+        'end': '"""(?!")'
         'endCaptures':
-          '1':
-            'name': 'end.scala'
+          '0':
+            'name': 'punctuation.definition.string.end.scala'
         'patterns': [
           { 'include': '#interpolation-expression' }
         ]
       }
       {
-        'name': "scala.string-interpolation"
-        'begin': '(s")'
+        'name': "string.quoted.double.scala"
+        'begin': '\\w+"'
         'beginCaptures':
-          '1':
-            'name': 'start'
-        'end': '(")'
+          '0':
+            'name': 'punctuation.definition.string.begin.scala'
+        'end': '"'
         'endCaptures':
-          '1':
-            'name': 'end.scala'
+          '0':
+            'name': 'punctuation.definition.string.end.scala'
         'patterns': [
           { 'include': '#interpolation-expression' }
         ]
