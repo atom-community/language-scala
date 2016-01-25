@@ -32,7 +32,7 @@
     'beginCaptures':
       '0':
         'name': 'punctuation.definition.character.begin.scala'
-    'end': '\''
+    'end': '\'(?!\')'
     'endCaptures':
       '0':
         'name': 'punctuation.definition.character.end.scala'
@@ -47,11 +47,7 @@
         'name': 'invalid.illegal.unrecognized-character-escape.scala'
       }
       {
-        'match': '[^\']{2,}'
-        'name': 'invalid.illegal.character-literal-too-long'
-      }
-      {
-        'match': '(?<!\')[^\']'
+        'match': '.{2,}(?=\')'
         'name': 'invalid.illegal.character-literal-too-long'
       }
     ]
