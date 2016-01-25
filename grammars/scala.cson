@@ -47,7 +47,11 @@
         'name': 'invalid.illegal.unrecognized-character-escape.scala'
       }
       {
-        'match': '.{2,}(?=\')'
+        'match': '[^\']{2,}'
+        'name': 'invalid.illegal.character-literal-too-long'
+      }
+      {
+        'match': '(?<!\')[^\']'
         'name': 'invalid.illegal.character-literal-too-long'
       }
     ]
