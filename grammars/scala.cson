@@ -316,7 +316,7 @@
             'name': 'keyword.declaration.scala'
           '2':
             'name': 'entity.name.function.declaration'
-        'match': '(?x)\n\t\t\t\t\t\t\\b(def)\\s+\n\t\t\t\t\t\t(`[^`]+`|[_$a-zA-Z][_$a-zA-Z0-9]*(?:_[^\\s])(?=[(\\t ])|[_$a-zA-Z][_$a-zA-Z0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
+        'match': '(?x)\n\t\t\t\t\t\t\\b(def)\\s+\n\t\t\t\t\t\t(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[(\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
       }
       {
         'captures':
@@ -334,7 +334,7 @@
             'name': 'keyword.declaration.scala'
           '2':
             'name': 'entity.name.type.declaration'
-        'match': '\\b(type)\\s+(`[^`]+`|[_$a-zA-Z][_$a-zA-Z0-9]*(?:_[^\\s])(?=[\\t ])|[_$a-zA-Z][_$a-zA-Z0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
+        'match': '\\b(type)\\s+(`[^`]+`|[_$\\p{L}][_$a-z\\p{L}]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
       }
       {
         'captures':
@@ -344,7 +344,7 @@
             'name': 'keyword.declaration.volatile.scala'
           '3':
             'name': 'entity.name.val.declaration'
-        'match': '\\b(?:(val)|(var))\\s+(?:(`[^`]+`|[_$a-zA-Z][_$a-zA-Z0-9]*(?:_[^\\s])(?=[\\t ])|[_$a-zA-Z][_$a-zA-Z0-9]*|[-?~><^+*%:!#|/@\\\\]+)|(?=\\())'
+        'match': '\\b(?:(val)|(var))\\s+(?:(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)|(?=\\())'
       }
       {
         'captures':
@@ -494,8 +494,8 @@
             'name': 'variable.parameter.scala'
           '2':
             'name': 'meta.colon.scala'
-        'comment': 'We do not match param names that start with a Capitol letter'
-        'match': '(?<=[^\\._$a-zA-Z0-9])(`[^`]+`|[_$a-z][_$a-zA-Z0-9]*(?:_[^\\s])(?=[\\t ])|[_$a-z][_$a-zA-Z0-9]*|[-?~><^+*%:!#|/@\\\\]+)\\s*(:)\\s+'
+        'comment': 'We do not match param names that start with a Capital letter'
+        'match': '(?<=[^\\._$\\p{L}0-9])(`[^`]+`|[_$\\p{Ll}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{Ll}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)\\s*(:)\\s+'
       }
     ]
   'qualifiedClassName':
