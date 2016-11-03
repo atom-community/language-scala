@@ -1,5 +1,6 @@
 'fileTypes': [
   'scala',
+  'sc',
   'sbt'
 ]
 'firstLineMatch': '^#!/.*\\b\\w*scala\\b'
