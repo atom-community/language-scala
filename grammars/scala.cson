@@ -459,7 +459,7 @@
         'name': 'keyword.operator.scala'
       }
       {
-        'match': '\\b(=|==|===|!=|<=|>=|<>|<|>)\\b'
+        'match': '\\b(===|==|=|!=|<=|>=|<>|<|>)\\b'
         'name': 'keyword.operator.comparison.scala'
       }
       {
