@@ -455,11 +455,11 @@
         'name': 'keyword.control.exception.scala'
       }
       {
-        'match': '(<-|←|->|→|=>|⇒|~>|\\?|\\:+|@|\\|)+'
+        'match': '(<-|←|->>|->|→|=>|⇒|~>|>>=|\\?|\\:+|@|\\|)+'
         'name': 'keyword.operator.scala'
       }
       {
-        'match': '(==?|!=|<=|>=|<>|<|>)'
+        'match': '\\b(===|==|=|!=|<=|>=|<>|<|>)\\b'
         'name': 'keyword.operator.comparison.scala'
       }
       {
