@@ -1,6 +1,6 @@
 {
   "name": "language-scala",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "description": "Scala language support in Atom",
   "repository": "https://github.com/jroesch/language-scala",
   "license": "MIT",
