@@ -317,7 +317,7 @@
             'name': 'keyword.declaration.scala'
           '2':
             'name': 'entity.name.function.declaration'
-        'match': '(?x)\n\t\t\t\t\t\t\\b(def)\\s+\n\t\t\t\t\t\t(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[(\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
+        'match': '(?x)\n\t\t\t\t\t\t\\b(def)\\s+\n\t\t\t\t\t\t(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[(\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[!#%&*+\-/:<=>?@\\\\^|~]+)'
       }
       {
         'captures':
@@ -335,7 +335,7 @@
             'name': 'keyword.declaration.scala'
           '2':
             'name': 'entity.name.type.declaration'
-        'match': '\\b(type)\\s+(`[^`]+`|[_$\\p{L}][_$a-z\\p{L}]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)'
+        'match': '\\b(type)\\s+(`[^`]+`|[_$\\p{L}][_$a-z\\p{L}]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[!#%&*+\-/:<=>?@\\\\^|~]+)'
       }
       {
         'captures':
@@ -345,7 +345,7 @@
             'name': 'keyword.declaration.volatile.scala'
           '3':
             'name': 'entity.name.val.declaration'
-        'match': '\\b(?:(val)|(var))\\s+(?:(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)|(?=\\())'
+        'match': '\\b(?:(val)|(var))\\s+(?:(`[^`]+`|[_$\\p{L}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{L}][_$\\p{L}0-9]*|[!#%&*+\-/:<=>?@\\\\^|~]+)|(?=\\())'
       }
       {
         'captures':
@@ -455,20 +455,16 @@
         'name': 'keyword.control.exception.scala'
       }
       {
-        'match': '(<-|←|->>|->|→|=>|⇒|~>|>>=|\\?|\\:+|@|\\|)+'
-        'name': 'keyword.operator.scala'
+        'captures':
+          '2':
+            'name': 'keyword.operator.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+([^!#%&*+\-/:<=>?@\\\\^|~])'
       }
       {
-        'match': '\\b(===|==|=|!=|<=|>=|<>|<|>)\\b'
-        'name': 'keyword.operator.comparison.scala'
-      }
-      {
-        'match': '(\\-|\\+|\\*|/(?![/*])|%|~)'
-        'name': 'keyword.operator.arithmetic.scala'
-      }
-      {
-        'match': '(!|&&|\\|\\|)'
-        'name': 'keyword.operator.logical.scala'
+        'captures':
+          '2':
+            'name': 'keyword.operator.assignment.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(=)([^!#%&*+\-/:<=>?@\\\\^|~])'
       }
     ]
   'meta-brackets':
@@ -496,7 +492,7 @@
           '2':
             'name': 'meta.colon.scala'
         'comment': 'We do not match param names that start with a Capital letter'
-        'match': '(?<=[^\\._$\\p{L}0-9])(`[^`]+`|[_$\\p{Ll}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{Ll}][_$\\p{L}0-9]*|[-?~><^+*%:!#|/@\\\\]+)\\s*(:)\\s+'
+        'match': '(?<=[^\\._$\\p{L}0-9])(`[^`]+`|[_$\\p{Ll}][_$\\p{L}0-9]*(?:_[^\\s])(?=[\\t ])|[_$\\p{Ll}][_$\\p{L}0-9]*|[!#%&*+\-/:<=>?@\\\\^|~]+)\\s*(:)\\s+'
       }
     ]
   'qualifiedClassName':
