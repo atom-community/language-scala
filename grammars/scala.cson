@@ -225,7 +225,7 @@
                 'name': 'entity.name.class'
               '3':
                 'name': 'entity.name.description'
-            'match': "(@(?:tparam|throws))\\s+(\\S+)\\s+(.*)"
+            'match': "(@(?:tparam|throws))\\s+(\\w+)\\s+(.*)"
           }
           {
             'match': '@(return|see|note|example|author|version|since|todo|deprecated|migration|define|inheritdoc|constructor)\\b'
@@ -327,7 +327,7 @@
             'name': 'keyword.declaration.scala'
           '3':
             'name': 'entity.name.class.declaration'
-        'match': '(case)?\\b(class|trait|object)\\s+([^\\s\\{\\(\\[]+)'
+        'match': '(case)?\\b(class|trait|object)\\s+(\\w+)'
       }
       {
         'captures':
@@ -353,7 +353,7 @@
             'name': 'keyword.declaration.scala'
           '2':
             'name': 'entity.name.class.declaration'
-        'match': '\\b(package object)\\s+([^\\s\\{\\(\\[]+)'
+        'match': '\\b(package object)\\s+(\\w+)'
       }
       {
         'captures':
@@ -435,7 +435,7 @@
         'name': 'keyword.declaration.scala'
       '2':
         'name': 'entity.name.class'
-    'match': '\\b(new)\\s+([^\\s\\{\\(\\[]+)'
+    'match': '\\b(new)\\s+(\\w+)'
   'keywords':
     'patterns': [
       {
