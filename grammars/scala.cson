@@ -447,7 +447,7 @@
         'name': 'support.function.type-of.scala'
       }
       {
-        'match': '\\b(else|if|do|while|for|yield|match|case|until)\\b'
+        'match': '\\b(else|if|do|while|for|yield|match|case|until|to)\\b'
         'name': 'keyword.control.flow.scala'
       }
       {
