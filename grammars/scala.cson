@@ -447,7 +447,7 @@
         'name': 'support.function.type-of.scala'
       }
       {
-        'match': '\\b(else|if|do|while|for|yield|match|case)\\b'
+        'match': '\\b(else|if|do|while|for|yield|match|case|until|to)\\b'
         'name': 'keyword.control.flow.scala'
       }
       {
@@ -458,13 +458,37 @@
         'captures':
           '2':
             'name': 'keyword.operator.scala'
-        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(<-|←|->|→|=>|⇒|\\?|\\:+|@|\\|)+([^!#%&*+\-/:<=>?@\\\\^|~])'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(\\+\\+|:::|\\+:|::|:\\+|<-|←|->|→|=>|⇒|\\?|@)+([^!#%&*+\-/:<=>?@\\\\^|~])'
       }
       {
         'captures':
           '2':
             'name': 'keyword.operator.assignment.scala'
-        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(=)([^!#%&*+\-/:<=>?@\\\\^|~])'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(=|\\+=|-=|\\*=|\\/=|%=|<<=|>>=|&=|\\^=|\\|=)([^!#%&*+\-/:<=>?@\\\\^|~])'
+      }
+      {
+        'captures':
+          '2':
+            'name': 'keyword.operator.arithmetic.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(\\+|-|\\*|\\/|%)+([^!#%&*+\-/:<=>?@\\\\^|~])'
+      }
+      {
+        'captures':
+          '2':
+            'name': 'keyword.operator.logical.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])?(&&|\\|\\||!)+([^!#%&*+\-/:<=>?@\\\\^|~])'
+      }
+      {
+        'captures':
+          '2':
+            'name': 'keyword.operator.bitwise.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])?(&|\\||\\^|~|<<|>>|>>>)+([^!#%&*+\-/:<=>?@\\\\^|~])'
+      }
+      {
+        'captures':
+          '2':
+            'name': 'keyword.operator.relational.scala'
+        'match': '([^!#%&*+\-/:<=>?@\\\\^|~_])(==|!=|<|>|<=|>=)+([^!#%&*+\-/:<=>?@\\\\^|~])'
       }
     ]
   'meta-brackets':
